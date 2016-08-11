@@ -8,7 +8,7 @@ when responding to confirmed and suspected security incidents.
 
 ASPIRATIONS:
    Change the proxy remotely
-   Change the account to -> "DSFCUSECOPS::9iVyhXp)ddN_FM!eaWvq?d5?k7:J["
+   Change the account to -> "DSFCUSECOPS::-----"
 
 
 Programmer: q0m
