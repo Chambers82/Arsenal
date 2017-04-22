@@ -23,6 +23,14 @@ import java.net.*;
 import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
+/* ------------------------ Adding crypto libs ---------------- */
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 
 public class jBot 
@@ -35,6 +43,9 @@ public class jBot
 	
 	public static void main(String args[]) 
 	{
+
+      final String secretKey = "SupportFreeInformation";
+
 		// Connect to specified host on specified port
 		try
 		{
@@ -114,8 +125,8 @@ public class jBot
 					String[] dataArray = null;
 					BufferedReader stdInput = null;
 					BufferedReader stdError = null;
-					String s = null;
-               String line = null;
+					String s                = null;
+               String line             = null;
                List<String> records = new ArrayList<String>();
 					try
 					{
