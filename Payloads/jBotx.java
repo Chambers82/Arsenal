@@ -185,5 +185,3 @@ public class jBotx
 
 	}
 }
-		
-
