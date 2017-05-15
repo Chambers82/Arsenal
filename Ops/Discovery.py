@@ -18,109 +18,105 @@ RESULTS_FILE = './nmap_results.xml'
 
 
 def remove_dupes(jaja):
-        uniqueList = Set(jaja)
-        return uniqueList
+	uniqueList = Set(jaja)
+	return uniqueList
 
 
 def cp_collect():
-        master =[]
-        while 1:
-                host = raw_input("Item: ")
-                if host == "done":
-                        unique_master = remove_dupes(master)
-                        return unique_master
-                master.append(host)
-        unique_master = remove_dupes(master)
-        return unique_master
+	master =[]
+	while 1:
+		host = raw_input("Item: ")
+		if host == "done":
+				unique_master = remove_dupes(master)
+				return unique_master
+		master.append(host)
+	unique_master = remove_dupes(master)
+	return unique_master
 
 class discovery:
-    host = ''
-    port = ''
-    results = RESULTS_FILE
+	host = ''
+	port = ''
+	results = RESULTS_FILE
+		
+	def __init__(self):
+		pass
+	# -------------------- Don't scan for ports, scan for vulns!!! ------------------------
 
-    def __init__(self):
-	pass
+	def enum_http(self, targets):
+		cmd = "nmap -n -sV -Pn -p 80,8080,9090 --script=http-enum,http-vhosts,http-userdir-enum,http-apache-negotiation,http-backup-finder,http-config-backup,http-default-accounts,http-methods,http-method-tamper,http-passwd,http-robots.txt,http-iis-webdav-vuln,http-vuln-cve2009-3960,http-vuln-cve2010-0738,http-vuln-cve2011-3368,http-vuln-cve2012-1823,http-vuln-cve2013-0156,http-waf-detect,http-waf-fingerprint,ssl-enum-ciphers,ssl-known-key -oA http_enumeration " + targets
+		print cmd
+		os.system(cmd)
 
-    def common_services(self, targets):
-	cmd = "nmap -sS -sU  -p U:53,T:22,T:23,T:25,T:79,T:80,134-139 " + targets + " -oX common_services.xml"
-	print cmd
-	os.system(cmd)
+	def enum_ftp(self, targets):
+		cmd = "nmap -sV -Pn -n -p 21 --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221 -oA ftp_enumeration " + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_mssql(self, targets):
+		cmd = "nmap -n -sV -sT -Pn -p 1433 --script=ms-sql-brute,ms-sql-config,ms-sql-dac,ms-sql-dump-hashes,ms-sql-empty-password,ms-sql-hasdbaccess,ms-sql-info,ms-sql-query,ms-sql-tables,ms-sql-xp-cmdshell -oA mysql_enumeration" + targets
+		print cmd
+		os.system(cmd)
 
-    def enum_http(self, targets):
-	cmd = "nmap --script http-enum,http-headers,http-methods,http-php-version -p80 " + targets + " -oX http_enum.xml"
-	print cmd
-	os.system(cmd)
+	def enum_mysql(self, targets):
+		cmd = "nmap -n -sV -sT -Pn -p 3306 --script=mysql-empty-password,mysql-vuln-cve2012-2122 -oA mysql_enumeration " + targets
+		print cmd
+		os.system(cmd)
 
-    def windows_vuln_ports(self, targets):
-	cmd = "nmap -sS -sU -p T:25,U:69,T:80,134-139,T:445,1025,1434,2745,3127-3198,4899,5000,6129 " + targets + " -oX windows_vulns.xml"
-	print cmd
-	os.system(cmd)
+	def enum_ntp(self, targets):
+		cmd = "nmap -n -Pn -sU -p 123 --script=ntp-info -oA ntp_enumeration " + targets 
+		print cmd
+		os.system(cmd)
+		
+	def enum_oracle(self, targets):
+		cmd = "nmap -n -sV -sT -Pn -p 1521 --script=oracle-brute.nse,oracle-brute-stealth.nse,oracle-enum-users.nse,oracle-sid-brute -oA oracle_enum " + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_rdp(self, targets):
+		cmd = "nmap -Pn -sV -p 3389 --script=rdp-enum-encryption,rdp-vuln-ms12-020.nse -oA rdp_enumeration "  + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_smb(self, targets):
+		cmd = "nmap -n -sV -sU -sS -Pn -pT:139,445,U:137 --script=nbstat,smb-enum-domains,smb-enum-groups,smb-enum-processes,smb-enum-sessions,smb-ls,smb-mbenum,smb-os-discovery,smb-print-text,smb-security-mode,smb-server-stats,smb-system-info,smb-vuln-conficker,smb-vuln-ms06-025,smb-vuln-ms07-029,smb-vuln-ms08-067,smb-vuln-ms10-054,smb-vuln-ms10-061 -oA smb_enumeration %s" + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_smtp(self, targets):
+		cmd = "nmap -n -sV -sT -Pn -p 25,465,587 --script=smtp-commands,smtp-vuln-cve2010-4344,smtp-vuln-cve2011-1764 -oA smtp_enumeration %s" + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_snmp(self, targets):
+		cmd = "nmap -vv -sV -sU -Pn -p 161,162 --script=snmp-netstat,snmp-processes " + targets
+		print cmd
+		os.system(cmd)
+		
+	def enum_vnc(self, targets):
+		cmd = "nmap -n -sV -sT -Pn -p 5900 --script=realvnc-auth-bypass,vnc-brute,vnc-info --script-args=unsafe=1 -oA " + targets + "/" + targets + "_vnc " + targets
+		print cmd
+		os.system(cmd)
 
-    def linux_vuln_ports(self, targets):
-	cmd = "nmap -sS -sU -p 21,20,69,23,T:25,110,143,513,514,80 " + targets + " -oX linux_vulns.xml"
-	print cmd
-	os.system(cmd)
+	def fingerprint_web(self, target):
+		cmd = "xprobe2 -v -p tcp:80:open " + target + " > http_fingerprint.rsc"
+		os.system(cmd)
+		cmd = "xprobe2 -v -p tcp:443:open " + target + " > https_fingerprint.rsc"
+		os.system(cmd)
 
-    def web_vuln_scan_setup(self):
-	cmd = "cd /usr/share/nmap/scripts/"
-	os.system(cmd)
-	cmd = "wget http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz && tar xzf nmap_nse_vulscan-2.0.tar.gz"
-	os.system(cmd)
+	def enum_snmp_public(self, target, strang="public"):
+		cmd = "snmpget -v 1 -c " + strang + " " + target + " > snmpget_"+target+".rsc"
+		os.system(cmd)
+		cmd = "snmpwalk -v 1 -c " + strang + " " + target + " > snmpwalk_"+target+".rsc"
+		os.system(cmd)
+		cmd = "snmpbulkwalk -v2c -c " + strang + " -Cn0 -Cr10 " + target + " > snmpbulk_"+target+".rsc"
+		os.system(cmd)
 
-    def web_vuln_scan(self, targets):
-	cmd = "nmap -vv -sS -sV --script=vulscan/vulscan.nse " + targets + " -oN vulnscan_results.n"
-	os.system(cmd)
-	cmd = "nmap -vv -sS -sV --script=vulscan/vulscan.nse -script-args vulscandb=scipvuldb.csv -p80 " + targets + " -oN vulnscabdb_results.n"
-	os.system(cmd)
-	cmd = "nmap -vv -PN -sS -sV --script=vulscan -script-args vulscancorrelation=1 -p80 " + targets + " -oN correlation_results.n"
-	os.system(cmd)		
-	cmd = "nmap -vv -sV --script=vuln " + targets + " -oN vuln_resulsts.n"
-	os.system(cmd)
-	cmd = "nmap -vv -PN -sS -sV --script=all -script-args vulscancorrelation=1 " + targets + " -oN vuln_scan_all_results.n"
-	os.system(cmd)
+	def identify_waf(self, targets):
+		cmd = "nmap -p 80,443 --script=http-waf-detect,http-waf-fingerprint -oA waf_ident " + targets
+		print cmd
+		os.system(cmd)
 
-    def fingerprint_web(self, target):
-	cmd = "xprobe2 -v -p tcp:80:open " + target + " > http_fingerprint.rsc"
-	os.system(cmd)
-	cmd = "xprobe2 -v -p tcp:443:open " + target + " > https_fingerprint.rsc"
-	os.system(cmd)
-
-    def enum_snmp(self, target, strang="public"):
-	cmd = "snmpget -v 1 -c " + strang + " " + target + " > snmpget_"+target+".rsc"
-	os.system(cmd)
-	cmd = "snmpwalk -v 1 -c " + strang + " " + target + " > snmpwalk_"+target+".rsc"
-	os.system(cmd)
-	cmd = "snmpbulkwalk -v2c -c " + strang + " -Cn0 -Cr10 " + target + " > snmpbulk_"+target+".rsc"
-	os.system(cmd)
-
-    def identify_waf(self, targets):
-	cmd = "nmap -p 80,443 --script=http-waf-detect " + targets + " > waf_detect_"+targets+".rsc"
-	os.system(cmd)
-	cmd = "nmap -p 80,443 --script=http-waf-fingerprint " + targets + " > waf_fingerprint_"+targets+".rsc"
-	os.system(cmd)
-
-    def smart_nmap_scan(self, network):
-	cmd = "nmap -sn -oG Discovery.gnmap " + network
-	os.system(cmd)
-	cmd = "grep \"Status: Up\" Discovery.gnmap | cut -f 2 -d ' ' > LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -sS -Pn -oG TopTCP -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -sU -Pn -oN TopUDP -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -sS -Pn --top-ports 3674 -oG 3674 -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -sS -Pn -p 0-65535 -oN FullTCP -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "grep \"open\" FullTCP|cut -f 1 -d ' ' | sort -nu | cut -f 1 -d '/' |xargs | sed 's/ /,/g'|awk '{print \"T:\"$0}'"
-	os.system(cmd)
-	#cmd = "grep \"open\" FullUDP|cut -f 1 -d ' ' | sort -nu | cut -f 1 -d '/' |xargs | sed 's/ /,/g'|awk '{print "U:"$0}'"
-	#os.system(cmd)
-	cmd = "nmap -sV -Pn -oG ServiceDetect -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -O -Pn -oG OSDetect -iL LiveHosts.txt"
-	os.system(cmd)
-	cmd = "nmap -O -sV -Pn -p U:53,111,137,T:21-25,80,139,8080 -oG OS_Service_Detect -iL LiveHosts.txt"
-	os.system(cmd)
-
-
+	def nikto_scan(self, target, port):
+		cmd = "nikto -host " + target + " -p " + port + " -C all | tee " + target + "_nikto_scan"
+		print cmd
+		os.system(cmd)

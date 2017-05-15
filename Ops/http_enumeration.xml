@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///C:/Program Files (x86)/Nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.12 scan initiated Thu May 11 20:43:03 2017 as: nmap -n -sV -Pn -p 80,8080,9090 -&#45;script=http-enum,http-vhosts,http-userdir-enum,http-apache-negotiation,http-backup-finder,http-config-backup,http-default-accounts,http-methods,http-method-tamper,http-passwd,http-robots.txt,http-iis-webdav-vuln,http-vuln-cve2009-3960,http-vuln-cve2010-0738,http-vuln-cve2011-3368,http-vuln-cve2012-1823,http-vuln-cve2013-0156,http-waf-detect,http-waf-fingerprint,ssl-enum-ciphers,ssl-known-key -oA http_enumeration 192.168.1.102 -->
+<nmaprun scanner="nmap" args="nmap -n -sV -Pn -p 80,8080,9090 -&#45;script=http-enum,http-vhosts,http-userdir-enum,http-apache-negotiation,http-backup-finder,http-config-backup,http-default-accounts,http-methods,http-method-tamper,http-passwd,http-robots.txt,http-iis-webdav-vuln,http-vuln-cve2009-3960,http-vuln-cve2010-0738,http-vuln-cve2011-3368,http-vuln-cve2012-1823,http-vuln-cve2013-0156,http-waf-detect,http-waf-fingerprint,ssl-enum-ciphers,ssl-known-key -oA http_enumeration 192.168.1.102" start="1494560583" startstr="Thu May 11 20:43:03 2017" version="7.12" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="3" services="80,8080,9090"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1494560585" endtime="1494560597"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.102" addrtype="ipv4"/>
+<address addr="00:0C:29:D4:A5:C3" addrtype="mac" vendor="VMware"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack" reason_ttl="64"/><service name="http" product="Apache httpd" version="2.2.8" extrainfo="(Ubuntu) DAV/2" method="probed" conf="10"><cpe>cpe:/a:apache:http_server:2.2.8</cpe></service><script id="http-apache-negotiation" output="mod_negotiation enabled."/><script id="http-enum" output="&#xa;  /tikiwiki/: Tikiwiki&#xa;  /test/: Test page&#xa;  /phpinfo.php: Possible information file&#xa;  /phpMyAdmin/: phpMyAdmin&#xa;  /doc/: Potentially interesting directory w/ listing on &apos;apache/2.2.8 (ubuntu) dav/2&apos;&#xa;  /icons/: Potentially interesting folder w/ directory listing&#xa;  /index/: Potentially interesting folder&#xa;"/><script id="http-methods" output="&#xa;  Supported Methods: GET HEAD POST OPTIONS"><table key="Supported Methods">
+<elem>GET</elem>
+<elem>HEAD</elem>
+<elem>POST</elem>
+<elem>OPTIONS</elem>
+</table>
+</script><script id="http-server-header" output="Apache/2.2.8 (Ubuntu) DAV/2"><elem>Apache/2.2.8 (Ubuntu) DAV/2</elem>
+</script><script id="http-vhosts" output="&#xa;127 names had status 200"/></port>
+<port protocol="tcp" portid="8080"><state state="closed" reason="reset" reason_ttl="64"/><service name="http-proxy" method="table" conf="3"/></port>
+<port protocol="tcp" portid="9090"><state state="closed" reason="reset" reason_ttl="64"/><service name="zeus-admin" method="table" conf="3"/></port>
+</ports>
+<times srtt="204" rttvar="2472" to="100000"/>
+</host>
+<runstats><finished time="1494560597" timestr="Thu May 11 20:43:17 2017" elapsed="14.66" summary="Nmap done at Thu May 11 20:43:17 2017; 1 IP address (1 host up) scanned in 14.66 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

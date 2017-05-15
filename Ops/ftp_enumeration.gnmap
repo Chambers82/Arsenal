@@ -1,0 +1,4 @@
+# Nmap 7.12 scan initiated Thu May 11 20:49:49 2017 as: nmap -sV -Pn -n -p 21 --script=ftp-anon,ftp-bounce,ftp-libopie,ftp-proftpd-backdoor,ftp-vsftpd-backdoor,ftp-vuln-cve2010-4221 -oA ftp_enumeration 192.168.1.102
+Host: 192.168.1.102 ()	Status: Up
+Host: 192.168.1.102 ()	Ports: 21/open/tcp//ftp//vsftpd 2.3.4/
+# Nmap done at Thu May 11 20:49:53 2017 -- 1 IP address (1 host up) scanned in 4.46 seconds

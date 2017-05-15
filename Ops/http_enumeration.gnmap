@@ -1,0 +1,4 @@
+# Nmap 7.12 scan initiated Thu May 11 20:43:03 2017 as: nmap -n -sV -Pn -p 80,8080,9090 --script=http-enum,http-vhosts,http-userdir-enum,http-apache-negotiation,http-backup-finder,http-config-backup,http-default-accounts,http-methods,http-method-tamper,http-passwd,http-robots.txt,http-iis-webdav-vuln,http-vuln-cve2009-3960,http-vuln-cve2010-0738,http-vuln-cve2011-3368,http-vuln-cve2012-1823,http-vuln-cve2013-0156,http-waf-detect,http-waf-fingerprint,ssl-enum-ciphers,ssl-known-key -oA http_enumeration 192.168.1.102
+Host: 192.168.1.102 ()	Status: Up
+Host: 192.168.1.102 ()	Ports: 80/open/tcp//http//Apache httpd 2.2.8 ((Ubuntu) DAV|2)/, 8080/closed/tcp//http-proxy///, 9090/closed/tcp//zeus-admin///
+# Nmap done at Thu May 11 20:43:17 2017 -- 1 IP address (1 host up) scanned in 14.66 seconds
