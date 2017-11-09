@@ -7,27 +7,19 @@
 		<nav>
 		<h2>Professional Services</h2>
 			<ul>
-				<li><a href="oss.html">Custom Operational Security Software</a></li>
-				<li><a href="pentrn.html">GO!-Penetration Testing</a></li>
-				<li><a href="deftrn.html">Compromise Detection Services</a></li>
-				<li><a href="dstci.html">Security Education</a></li>
 			</ul>
 		</nav>
 		<section id="extra">
 			<h2>Contact Info:</h2>
 			<b>Current City:</b> Phoenix, AZ<br>
-			<B>Phone:</b> 602.Three-Seven-Three.586-Zero<br>
 			<b>Email:</b> brent dot chambers at gmail dot com
 			<!-- <p><a href="http://www.github.com/">Remote.py</a> -- (DEF) Remote access python wrapper -->
 		</section>
 		<footer>
 			<ul>
-				<li><a href="index.html">Main</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="links.html">Links</a></li>
 				<li><a href="about.html">About</a></li>
 			</ul>
-			<p>Erbnam Digital Publishing. Copyright © 2015</p>
+			<p>Erbnam Digital Publishing. Copyright Â© 2015</p>
 		</footer>
 	</div>
 </body>
