@@ -11,7 +11,7 @@ def shif():
     svar.set(shif.msg)
     root.after(deli, shif)
 
-shif.msg = ' Is this an alert, or what? Eat and lick on my sacimus maximumus, piece of crapimus '
+shif.msg = ' Is this an alert or what?'
 shif()
 labl.grid(column=1, row=1, sticky='E'+'W')
 root.mainloop()
